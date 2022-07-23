@@ -1,36 +1,46 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Movement
-{
     public class InputManager : MonoBehaviour
     {
         private Controls controls;
-        private Controls.KeyboardActions movementActions;
+        private Controls.KeyboardActions inputActions;
         private PlayerMovement playerMovement;
         private CameraMovement cameraMovement;
         private GunControll gunControll;
+        private Equipment equipment;
+
+        public static Action OnFirePressed;
 
         private void Awake()
         {
             controls = new Controls();
-            movementActions = controls.Keyboard;
+            inputActions = controls.Keyboard;
 
             playerMovement = GetComponent<PlayerMovement>();
             cameraMovement = GetComponentInChildren<CameraMovement>();
             gunControll = GetComponentInChildren<GunControll>();
+            equipment = GetComponentInChildren<Equipment>();
 
-            movementActions.Jump.performed += context => playerMovement.Jump();
-            //movementActions.Fire.performed += context => gunControll.Fire();
+            inputActions.Jump.performed += context => playerMovement.Jump();
+            inputActions.Equipment.performed += context => equipment.switchGun(context.control.name);
         }
 
         private void FixedUpdate()
         {
-            playerMovement.Move(movementActions.Movement.ReadValue<Vector2>());
-            cameraMovement.RotateCamera(movementActions.Camera.ReadValue<Vector2>());
-            if(movementActions.Fire.IsPressed()) 
-                gunControll.Shoot();
+           // Debug.Log(movementActions.Equipment.activeControl.name);
+            playerMovement.Move(inputActions.Movement.ReadValue<Vector2>());
+            cameraMovement.RotateCamera(inputActions.Camera.ReadValue<Vector2>());
+        if (inputActions.Fire.IsPressed())
+        {
+            OnFirePressed?.Invoke();
+            //gunControll = GetComponentInChildren<GunControll>();
+            //if(gunControll)
+                //gunControll.Shoot();
+        } 
+               
         }
         private void OnEnable()
         {
@@ -42,4 +52,3 @@ namespace Movement
             controls.Disable();
         }
     }
-}

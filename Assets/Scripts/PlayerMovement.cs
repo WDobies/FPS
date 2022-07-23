@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Movement
-{
+
     [RequireComponent(typeof(Rigidbody))]
     internal class PlayerMovement : MonoBehaviour
     {
@@ -43,4 +42,3 @@ namespace Movement
                 isGrounded = false;
         }
     }
-}

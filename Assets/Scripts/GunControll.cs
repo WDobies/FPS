@@ -14,21 +14,26 @@ public class GunControll : MonoBehaviour
     bool canShoot = true;
 
     private void Awake()
-    {
+    {     
         screenCenter = new Vector2(Screen.width / 2f, Screen.height / 2f);
         InvokeRepeating("Rep", 0.0f, fireRate);
+    }
+
+    private void OnEnable()
+    {
+        InputManager.OnFirePressed += Shoot;
     }
     public void Shoot()
     {
         ray = Camera.main.ScreenPointToRay(screenCenter);
-        if (Physics.Raycast(ray,out RaycastHit raycastHit, 999f, targetMask))
+        if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f, targetMask))
         {
             if (canShoot)
             {
                 canShoot = false;
                 Instantiate(hitParticle, raycastHit.point, raycastHit.transform.rotation);
                 Target target = raycastHit.transform.GetComponent<Target>();
-                Debug.Log(target);
+
                 if (target)
                 {
                     target.TakeDamage(damage, destroyableMaterial);
@@ -39,7 +44,7 @@ public class GunControll : MonoBehaviour
         else
         {
             //debugTransform.position = ray.GetPoint(100);            
-        }      
+        }
     }
 
     void Rep()
@@ -47,8 +52,8 @@ public class GunControll : MonoBehaviour
         canShoot = true;
     }
 
-    public void Test()
+    private void OnDisable()
     {
-        Debug.Log("test");
+        InputManager.OnFirePressed -= Shoot;
     }
 }

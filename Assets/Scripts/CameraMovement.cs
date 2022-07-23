@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Movement
-{
+
     internal class CameraMovement : MonoBehaviour
     {
         [SerializeField] private float sensitivity;
@@ -31,4 +30,3 @@ namespace Movement
             playerTransform.rotation = Quaternion.Euler(0, yRotation, 0);
         }
     }
-}
