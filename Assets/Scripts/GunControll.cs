@@ -7,11 +7,14 @@ public class GunControll : MonoBehaviour
     public Material destroyableMaterial;
     public float fireRate = 0.3f;
     public int damage = 20;
+    public Transform rifleTransform;
     [SerializeField] private LayerMask targetMask;
     [SerializeField] private GameObject hitParticle;
-    private Ray ray;
+    [SerializeField] private GameObject fireParticle;
+
+    private Ray     ray;
     private Vector2 screenCenter;
-    bool canShoot = true;
+    private bool    canShoot = true;
 
     private void Awake()
     {     
@@ -25,6 +28,7 @@ public class GunControll : MonoBehaviour
     }
     public void Shoot()
     {
+        Instantiate(fireParticle, rifleTransform.position, rifleTransform.rotation);
         ray = Camera.main.ScreenPointToRay(screenCenter);
         if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f, targetMask))
         {
@@ -38,7 +42,6 @@ public class GunControll : MonoBehaviour
                 {
                     target.TakeDamage(damage, destroyableMaterial);
                 }
-                //Debug.Log(raycastHit.point);
             }
         }
         else

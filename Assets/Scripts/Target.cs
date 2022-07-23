@@ -17,21 +17,20 @@ public class Target : MonoBehaviour
     [SerializeField] private TextMeshProUGUI durabilityText;
 
     public UnityEvent Destroyed;
-    public Material material;
-    public int healthPoints = 100;
+    public Material   material;
+    public int        healthPoints = 100;
     private void Awake()
     {
         UpdateText();
     }
     public void TakeDamage(int damage, Material targetMaterial)
     {
-        Debug.Log(targetMaterial);
         if(material == targetMaterial)
         {
             healthPoints -= damage;
-
             if (healthPoints <= 0)
                 Destroy(gameObject);
+
             UpdateText();
         }
     }
@@ -39,7 +38,6 @@ public class Target : MonoBehaviour
     public void OnDestroy() 
     {
         Destroyed?.Invoke();
-        Debug.Log("done");
     }
 
     public void UpdateText()
