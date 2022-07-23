@@ -2,41 +2,45 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+namespace Movement
 {
-    [SerializeField] Rigidbody rb;
-
-    public float movementSpeed;
-    public int jumpStrenght;
-    private bool isGrounded = false;
-
-    void Update()
+    [RequireComponent(typeof(Rigidbody))]
+    internal class PlayerMovement : MonoBehaviour
     {
-        if (Input.GetKey("w"))
-            rb.transform.position += transform.forward * movementSpeed * Time.deltaTime;  
+        private Rigidbody playerRigidbody;
 
-        if (Input.GetKey("s"))
-            rb.transform.position += -transform.forward * movementSpeed * Time.deltaTime;
+        public float movementSpeed;
+        public int jumpStrenght;
+        private bool isGrounded = false;
 
-        if (Input.GetKey("a"))
-            rb.transform.position += -transform.right * movementSpeed * Time.deltaTime;
+        private void Awake()
+        {
+            playerRigidbody = GetComponent<Rigidbody>();
+        }
+        public void Jump()
+        {
+            if(isGrounded)
+                playerRigidbody.AddForce(transform.up * jumpStrenght);
+        }
 
-        if (Input.GetKey("d"))
-            rb.transform.position += transform.right * movementSpeed * Time.deltaTime;
+        public void Move(Vector2 input)
+        {
+            //playerRigidbody.transform.position += transform.forward * input.y * movementSpeed * Time.deltaTime;
+            playerRigidbody.AddForce(((transform.forward * input.y) + (transform.right * input.x)) * movementSpeed * Time.deltaTime, ForceMode.Force);
+            //playerRigidbody.transform.position += transform.right * input.x * movementSpeed * Time.deltaTime;
+            //playerRigidbody.AddForce(transform.right * input.x * movementSpeed * Time.deltaTime, ForceMode.Acceleration);
+        }
 
-        if (Input.GetKeyDown("space") && isGrounded)
-            rb.AddForce(transform.up * jumpStrenght);
-    }
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.tag == "Ground")
+                isGrounded = true;
+        }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Ground")
-            isGrounded = true;
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.tag == "Ground")
-            isGrounded = false;
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.tag == "Ground")
+                isGrounded = false;
+        }
     }
 }
