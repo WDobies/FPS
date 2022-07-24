@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,9 +7,11 @@ public class Equipment : MonoBehaviour
 
     public void switchGun(string keyName)
     {
-        int key = int.Parse(keyName)-1;
+        //substract 1 from key name to fit positions on the list
+        int key = int.Parse(keyName) - 1;
 
-        if (!guns[key].active)
+        //enable gun which position on list == pressed key number, disable all the others
+        if (!guns[key].activeInHierarchy)
         {
             foreach (GameObject item in guns)
             {

@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -9,40 +6,44 @@ public enum Material
 {
     Iron,
     Wood,
-    Plastic
+    Cardboard
 }
+
 public class Target : MonoBehaviour
 {
+    public UnityEvent OnTargetDestroy;
+    public Material   material;
+    public int        durabilityPoints = 100;
+
     [SerializeField] private TextMeshProUGUI materialText;
     [SerializeField] private TextMeshProUGUI durabilityText;
 
-    public UnityEvent Destroyed;
-    public Material   material;
-    public int        healthPoints = 100;
     private void Awake()
     {
         UpdateText();
     }
-    public void TakeDamage(int damage, Material targetMaterial)
+
+    public void TakeDamage(int damage, Material gunMaterial)
     {
-        if(material == targetMaterial)
+        //if material set on gun equals material set on a target remove durability points
+        if (material == gunMaterial)
         {
-            healthPoints -= damage;
-            if (healthPoints <= 0)
+            durabilityPoints -= damage;
+            if (durabilityPoints <= 0)
                 Destroy(gameObject);
 
             UpdateText();
         }
     }
 
-    public void OnDestroy() 
+    public void OnDestroy()
     {
-        Destroyed?.Invoke();
+        OnTargetDestroy?.Invoke();
     }
 
     public void UpdateText()
     {
         materialText.SetText(material.ToString());
-        durabilityText.SetText(healthPoints.ToString());
+        durabilityText.SetText(durabilityPoints.ToString());
     }
 }
