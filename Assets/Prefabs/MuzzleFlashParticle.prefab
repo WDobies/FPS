@@ -9,7 +9,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3461586520974669181, guid: 437425a4c26513c44bf73752aa5b5de7, type: 3}
       propertyPath: m_Name
-      value: FireParticle Variant
+      value: MuzzleFlashParticle
+      objectReference: {fileID: 0}
+    - target: {fileID: 3461586520974669181, guid: 437425a4c26513c44bf73752aa5b5de7, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4839505567293335529, guid: 437425a4c26513c44bf73752aa5b5de7, type: 3}
       propertyPath: looping
