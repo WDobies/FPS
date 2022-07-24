@@ -985,6 +985,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1491636828}
     m_Modifications:
     - target: {fileID: 2831843434544250343, guid: 300181a9df601a24d9b8e52cadf68da1, type: 3}
+      propertyPath: durabilityPoints
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831843434544250343, guid: 300181a9df601a24d9b8e52cadf68da1, type: 3}
       propertyPath: OnTargetDestroy.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1381826429}
@@ -1097,6 +1101,10 @@ PrefabInstance:
     - target: {fileID: 4159128332922100307, guid: 69627adf0806ef94cb2d9fe7711ad1bd, type: 3}
       propertyPath: m_Name
       value: CardboardBox_small
+      objectReference: {fileID: 0}
+    - target: {fileID: 4160215127487913762, guid: 69627adf0806ef94cb2d9fe7711ad1bd, type: 3}
+      propertyPath: durabilityPoints
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 4160215127487913762, guid: 69627adf0806ef94cb2d9fe7711ad1bd, type: 3}
       propertyPath: OnTargetDestroy.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1370,6 +1378,10 @@ PrefabInstance:
       value: CardboardBox
       objectReference: {fileID: 0}
     - target: {fileID: 8101415986699073259, guid: a3e2e96d5bf71204a9a71f0e0e09bcff, type: 3}
+      propertyPath: durabilityPoints
+      value: 140
+      objectReference: {fileID: 0}
+    - target: {fileID: 8101415986699073259, guid: a3e2e96d5bf71204a9a71f0e0e09bcff, type: 3}
       propertyPath: OnTargetDestroy.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1381826429}
@@ -1434,6 +1446,10 @@ PrefabInstance:
     - target: {fileID: 9001695224949644106, guid: a81734e5017c7ca42afb012c32c2effc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001695225419561608, guid: a81734e5017c7ca42afb012c32c2effc, type: 3}
+      propertyPath: durabilityPoints
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 9001695225419561608, guid: a81734e5017c7ca42afb012c32c2effc, type: 3}
       propertyPath: OnTargetDestroy.m_PersistentCalls.m_Calls.Array.data[0].m_Target
